@@ -1,0 +1,43 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+
+\usepackage[shortlabels]{enumitem}
+\setcounter{secnumdepth}{4}
+
+
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{times}
+\usepackage{comment}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{subfigure}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{slashbox}
+\usepackage{pict2e}
+\usepackage{tabularx}
+
+
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+%
+\lhead{}
+\chead{Comparison of denoising methods}
+\rhead{}
+%
+\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+
+% \usepackage{hyperref} must almost always be LAST \usepackage in
+% preamble. Otherwise, you may get strange compilation errors!
+\usepackage[colorlinks,linkcolor=black]{hyperref}
+
+

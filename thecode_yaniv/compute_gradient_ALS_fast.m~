@@ -1,0 +1,82 @@
+function [dF M] = compute_gradient_ALS_fast(S, kernel, v_coef, g2, tri_areas, GD, order, delta, v)
+
+%, areas, cen)
+
+%UnitVectors;
+%g2=g([1:321],:);
+%g2=BuildSphere(2); % discrete integration directions: 2=162, 3=642, 4=2562 directions
+%g = sphere_tri('ico',4,1);
+%g2=g.vertices;
+
+%load sphere_triangulation_2562
+%g2=cen; % centroids
+%c1=0; c2=0; %0.0001; c2=0.0001;
+
+c1=0; %1e-4; 
+    
+%Sph_integral=exp(-delta*(GD(i,:)*g2').^2)*((v_coef(1)*g2(:,1)+v_coef(2)*g2(:,2)+v_coef(3)*g2(:,3)).^order.*areas');
+    
+%dF(i) = (S(i)-Sph_integral);
+    
+    
+%kernel=exp(-delta*(GD*g2').^2);
+%kernel=(1-delta/order*(GD(i,:)*g2').^2).^order;
+%kernel=(1-(GD(i,:)*g2')).^order;
+
+%kernel=1./(1+delta*(GD*g2').^2);
+
+%v_coef(:,1)=v_coef(:,1)/norm(v_coef(:,1));
+%v_coef(:,2)=v_coef(:,2)/norm(v_coef(:,2));
+
+Sph_integral= kernel*(((v_coef(1,1)*g2(:,1)+v_coef(2,1)*g2(:,2)+v_coef(3,1)*g2(:,3)).^order+(v_coef(1,2)*g2(:,1)+v_coef(2,2)*g2(:,2)+v_coef(3,2)*g2(:,3)).^order).*tri_areas');
+%Sph_integral_norm = 4*pi*Sph_integral/size(g2,1);
+    
+dF = (S'-Sph_integral); % derivative of objective function
+    
+    
+%integr=1:size(g2,1);
+%M(j,i)=-2*order*dF(i)*exp(-delta*(g(i,:)*g2').^2)*((v_coef(1)*g2(:,1)+v_coef(2)*g2(:,2)+v_coef(3)*g2(:,3)).^(order-1).*g2(:,j).*areas');
+            
+%d_Sph_integral=exp(-delta*(GD(i,:)*g2').^2)*(v_coef(1)*g2(:,1)+v_coef(2)*g2(:,2)+v_coef(3)*g2(:,3)).^(order-1).*g2(:,j).*areas';
+            
+if v==1
+            
+d_Sph_integral(:,1)=kernel*(((v_coef(1,1)*g2(:,1)+v_coef(2,1)*g2(:,2)+v_coef(3,1)*g2(:,3)).^(order-1).*g2(:,1)).*tri_areas');%+c1*2*v_coef(1,1)/(1-(norm(v_coef(:,1))^2+1e-6));
+d_Sph_integral(:,2)=kernel*(((v_coef(1,1)*g2(:,1)+v_coef(2,1)*g2(:,2)+v_coef(3,1)*g2(:,3)).^(order-1).*g2(:,2)).*tri_areas');%+c1*2*v_coef(2,1)/(1-(norm(v_coef(:,1))^2+1e-6));
+d_Sph_integral(:,3)=kernel*(((v_coef(1,1)*g2(:,1)+v_coef(2,1)*g2(:,2)+v_coef(3,1)*g2(:,3)).^(order-1).*g2(:,3)).*tri_areas');%+c1*2*v_coef(3,1)/(1-(norm(v_coef(:,1))^2+1e-6));
+
+% compute goodness of fit ratio for model selection
+%one_fiber_integral=4*pi/size(g2,1)*kernel*(v_coef(1,1)*g2(:,1)+v_coef(2,1)*g2(:,2)+v_coef(3,1)*g2(:,3)).^order;
+%fiber_one_norm_ratio=norm(one_fiber_integral)/norm(S)
+
+M_correction=[ones(length(dF),1)*c1*2*v_coef(1,1)/(0.5-(norm(v_coef(:,1))^2)),ones(length(dF),1)*c1*2*v_coef(2,1)/(0.5-(norm(v_coef(:,1))^2)),...
+    ones(length(dF),1)*c1*2*v_coef(3,1)/(0.5-(norm(v_coef(:,1))^2))];
+
+M=-order*d_Sph_integral+M_correction;
+            
+else
+    
+     d_Sph_integral(:,1)=kernel*(((v_coef(1,2)*g2(:,1)+v_coef(2,2)*g2(:,2)+v_coef(3,2)*g2(:,3)).^(order-1).*g2(:,1)).*tri_areas');%+c2*2*v_coef(1,2)/(1-norm(v_coef(:,2))^2);
+     d_Sph_integral(:,2)=kernel*(((v_coef(1,2)*g2(:,1)+v_coef(2,2)*g2(:,2)+v_coef(3,2)*g2(:,3)).^(order-1).*g2(:,2)).*tri_areas');%+c2*2*v_coef(2,2)/(1-norm(v_coef(:,2))^2);
+     d_Sph_integral(:,3)=kernel*(((v_coef(1,2)*g2(:,1)+v_coef(2,2)*g2(:,2)+v_coef(3,2)*g2(:,3)).^(order-1).*g2(:,3)).*tri_areas');%+c2*2*v_coef(3,2)/(1-norm(v_coef(:,2))^2);
+     
+     %one_fiber_integral=4*pi/size(g2,1)*kernel*(v_coef(1,2)*g2(:,1)+v_coef(2,2)*g2(:,2)+v_coef(3,2)*g2(:,3)).^order;
+     %fiber_two_norm_ratio=norm(one_fiber_integral)/norm(S);
+     
+     M_correction=[ones(length(dF),1)*c1*2*v_coef(2,1)/(0.5-(norm(v_coef(:,2))^2)),ones(length(dF),1)*c1*2*v_coef(2,2)/(0.5-(norm(v_coef(:,2))^2)),...
+    ones(length(dF),1)*c1*2*v_coef(3,2)/(0.5-(norm(v_coef(:,2))^2))];
+
+     M=-order*d_Sph_integral+M_correction;
+
+end
+                
+%d_Sph_integral_norm=4*pi*d_Sph_integral/size(g2,1);
+                        
+
+            
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                        
+%Bg(k,c)=4*pi*Bg(k,c)/size(g2,1);
+%Bg(k,c)=Bg(k,c).*areas'; % multiply by the areas of the spherical triangles
+            
+ 

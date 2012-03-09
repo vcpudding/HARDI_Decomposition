@@ -1,0 +1,57 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+
+\usepackage[shortlabels]{enumitem}
+\setcounter{secnumdepth}{4}
+
+
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{times}
+\usepackage{comment}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{subfigure}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{slashbox}
+\usepackage{pict2e}
+\usepackage{tabularx}
+
+
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+%
+\lhead{}
+\chead{Comparison of denoising methods}
+\rhead{}
+%
+\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+
+% \usepackage{hyperref} must almost always be LAST \usepackage in
+% preamble. Otherwise, you may get strange compilation errors!
+\usepackage[colorlinks,linkcolor=black]{hyperref}
+
+\begin{document}
+
+Steps:
+
+\begin{enumerate}
+\item Start with $\delta=10$, estimate fiber directions with $M=3$.
+\item Perform 5 trials with random initialization. Keep the results with convergence energy $e$ below the predefined threshold $t$ and discard others. We call the results with $e<t$ ``valid''.
+\item If the number of valid results is below 3, increase $\delta$ by 10 and perform Step 2 again.
+\item The number of fibers $M*$ is determined by the minimum number of fibers among the valid results. 
+\item If there're more than one result such that the estimated number of fibers is equal to $M*$, take the mean of their directions and fractions as the final output.
+\end{enumerate}
+
+\end{document}
+
+

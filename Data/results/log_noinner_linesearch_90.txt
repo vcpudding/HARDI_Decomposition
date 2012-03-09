@@ -1,0 +1,80 @@
+Init dirs: (0.11, 0.62, 0.78; 0.99, -0.01, -0.12)
+Init energy: 0.03
+Converge energy: 14.77
+Convergence : 2000 iterations, time = 51.903430
+Output dirs: (0.01, 1.00, -0.03; 1.00, -0.00, 0.02)
+Output weights: (0.50, 0.50)
+
+
+Init dirs: (0.97, 0.07, 0.22; -0.09, 0.99, 0.08)
+Init energy: 0.03
+Converge energy: 12.43
+Convergence : 1715 iterations, time = 46.070786
+Output dirs: (1.00, 0.01, 0.02; 0.00, 1.00, -0.03)
+Output weights: (0.50, 0.50)
+
+
+Init dirs: (0.23, 0.79, 0.57; 0.90, -0.40, 0.18)
+Init energy: 0.03
+Converge energy: 14.00
+Convergence : 1345 iterations, time = 30.186385
+Output dirs: (0.02, 1.00, -0.03; 1.00, -0.01, 0.02)
+Output weights: (0.50, 0.50)
+
+
+Init dirs: (0.28, 0.92, 0.28; 0.41, -0.38, 0.83)
+Init energy: 0.03
+Converge energy: 14.59
+Convergence : 2000 iterations, time = 45.415526
+Output dirs: (-1.00, -0.00, -0.02; -0.01, -1.00, 0.03)
+Output weights: (0.50, 0.50)
+
+
+Init dirs: (0.16, 0.50, 0.85; 0.95, 0.14, -0.26)
+Init energy: 0.03
+Converge energy: 15.19
+Convergence : 1220 iterations, time = 27.810642
+Output dirs: (0.01, 1.00, -0.03; 1.00, 0.00, 0.02)
+Output weights: (0.50, 0.50)
+
+
+Init dirs: (0.43, 0.66, 0.62; -0.14, 0.73, -0.67)
+Init energy: 0.03
+Converge energy: 14.98
+Convergence : 1947 iterations, time = 45.390257
+Output dirs: (1.00, 0.00, 0.02; 0.01, 1.00, -0.03)
+Output weights: (0.50, 0.50)
+
+
+Init dirs: (0.72, 0.09, 0.69; -0.50, 0.75, 0.43)
+Init energy: 0.03
+Converge energy: 15.00
+Convergence : 2000 iterations, time = 45.739872
+Output dirs: (1.00, 0.00, 0.02; 0.01, 1.00, -0.03)
+Output weights: (0.50, 0.50)
+
+
+Init dirs: (0.73, 0.63, 0.25; -0.47, 0.20, 0.86)
+Init energy: 0.03
+Converge energy: 15.35
+Convergence : 1453 iterations, time = 31.679764
+Output dirs: (0.01, 1.00, -0.03; -1.00, -0.00, -0.02)
+Output weights: (0.50, 0.50)
+
+
+Init dirs: (0.77, 0.08, 0.64; 0.28, 0.85, -0.45)
+Init energy: 0.03
+Converge energy: 14.25
+Convergence : 1608 iterations, time = 36.775705
+Output dirs: (1.00, -0.00, 0.02; 0.01, 1.00, -0.03)
+Output weights: (0.50, 0.50)
+
+
+Init dirs: (0.70, 0.12, 0.70; 0.65, 0.31, -0.70)
+Init energy: 0.03
+Converge energy: 15.63
+Convergence : 2000 iterations, time = 45.830445
+Output dirs: (-0.01, -1.00, 0.03; 1.00, 0.01, 0.02)
+Output weights: (0.50, 0.50)
+
+

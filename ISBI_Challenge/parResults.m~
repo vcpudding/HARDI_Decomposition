@@ -1,0 +1,54 @@
+function parResults (phantomName, bVal, SNR, denoise)
+
+folderName = sprintf('Results/%s__B=%04d__SNR=%02d__DELTA=auto__DENOISE=%d', phantomName, bVal, SNR, denoise);
+load( sprintf('TrainingData/%s__B=%04d__SNR=%02d__SIGNAL.mat', phantomName, bVal, SNR) );
+load( 'TrainingData/ODF_XYZ.mat' );
+[n1,n2,n3,nGrads] = size( E );
+
+
+load( fullfile('TrainingData/Phantoms',PHANTOM_name{1}) );
+trueField = FIELD;
+
+myESTIMATION = [];
+myESTIMATION.FIELD = cell(  n1, n2, n3 );
+myESTIMATION.ODF   = zeros( n1, n2, n3, 724 );
+
+for x = 1:n1
+for y = 1:n2
+for z = 1:n3
+    volFileName = fullfile(folderName, sprintf('v_%02d_%02d_%02d.mat', x,y,z));
+    load (volFileName);
+    myESTIMATION.FIELD{x,y,z} = result;
+    
+    R = result.R;
+    lambda = result.lambda;
+    
+    myEstimation.ODF(x,y,z,:) = odf;
+end
+end
+end
+
+save( sprintf('Results/%s__B=%04d__SNR=%02d__DELTA=auto__DENOISE=%d.mat', phantomName, bVal, SNR, denoise), 'myESTIMATION' );
+
+end
+
+function odf=getODF(R, lambda)
+
+    invDBuf = zeros(size(R));
+    detDBuf = zeros(1, result.M);
+    
+    for j=1:result.M
+        D = R(:,:,j)'*diag(lambda)*R(:,:,j);
+        invDBuf(:,:,j) = inv(D);
+        detDBuf(j) = sqrt(det(D(:,:,j)));
+    end
+    
+    odf = zeros(724, 1);
+    for i=1:724
+        dir = ODF_XYZ(i,:);
+        for j=1:result.M
+            odf(i) = odf(i)+result.f(j)*(dir*invDBuf(:,:,j)*dir')^(-3/2)/(4*pi*detDBuf(j));
+        end
+    end
+    
+end
