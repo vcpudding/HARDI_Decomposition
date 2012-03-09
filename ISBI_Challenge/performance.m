@@ -45,8 +45,8 @@ title(sprintf('Difference in ODF\n(%0.4f, %0.4f)\n(%0.4f, %0.4f)\n(%0.4f, %0.4f)
     meanStat(odfDiffBuf, numFiberBuf, 1), stdStat(odfDiffBuf, numFiberBuf, 1), ...
     meanStat(odfDiffBuf, numFiberBuf, 2), stdStat(odfDiffBuf, numFiberBuf, 2), ...
     meanStat(odfDiffBuf, numFiberBuf, 3), stdStat(odfDiffBuf, numFiberBuf, 1)));
-% saveas(hFig, sprintf('../Data/figures/%s__B=%04d__SNR=%02d__DENOISE=%d.jpg', phantomName, bVal, SNR, denoise));
-print(hFig, sprintf('../Data/figures/%s__B=%04d__SNR=%02d__DENOISE=%d.eps', phantomName, bVal, SNR, denoise), '-depsc');
+saveas(hFig, sprintf('../Data/figures/%s__B=%04d__SNR=%02d__DENOISE=%d.fig', phantomName, bVal, SNR, denoise));
+%print(hFig, sprintf('../Data/figures/%s__B=%04d__SNR=%02d__DENOISE=%d.eps', phantomName, bVal, SNR, denoise), '-depsc');
 
 end
 
