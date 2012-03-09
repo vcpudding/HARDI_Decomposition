@@ -28,7 +28,7 @@ for y = 1:n2
 end
 end
 
-hFig = figure('Visible', 'off');
+hFig = figure;
 subplot(1,3,1); 
 imagesc(deviateBuf); caxis([0, 20]); axis square; colorbar; 
 title(sprintf('Direction deviation\n(%0.4f, %0.4f)\n(%0.4f, %0.4f)\n(%0.4f, %0.4f)', ...
@@ -47,6 +47,8 @@ title(sprintf('Difference in ODF\n(%0.4f, %0.4f)\n(%0.4f, %0.4f)\n(%0.4f, %0.4f)
     meanStat(odfDiffBuf, numFiberBuf, 3), stdStat(odfDiffBuf, numFiberBuf, 1)));
 saveas(hFig, sprintf('../Data/figures/%s__B=%04d__SNR=%02d__DENOISE=%d.fig', phantomName, bVal, SNR, denoise));
 %print(hFig, sprintf('../Data/figures/%s__B=%04d__SNR=%02d__DENOISE=%d.eps', phantomName, bVal, SNR, denoise), '-depsc');
+
+close(hFig);
 
 end
 
